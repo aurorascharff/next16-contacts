@@ -1,16 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import MessageBox from '@/components/message-box/MessageBox';
 import { getContact } from '@/data/services/contact';
-import { routes } from '@/validations/routeSchema';
 import type { Metadata } from 'next';
 
-type LayoutProps = {
-  children: React.ReactNode;
-  params: Promise<unknown>;
-};
-
-export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
-  const { contactId } = routes.contactId.$parseParams(await params);
+export async function generateMetadata({ params }: LayoutProps<'/contacts/[contactId]'>): Promise<Metadata> {
+  const { contactId } = await params;
   const contact = await getContact(contactId);
 
   return contact && contact.first && contact.last
@@ -24,14 +18,19 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
       };
 }
 
-export default async function ContactsLayout({ children, params }: LayoutProps) {
-  const { contactId } = routes.contactId.$parseParams(await params);
+async function ContactMessageBox({ params }: { params: Promise<{ contactId: string }> }) {
+  const { contactId } = await params;
+  return <MessageBox contactId={contactId} />;
+}
 
+export default function ContactsLayout({ children, params }: LayoutProps<'/contacts/[contactId]'>) {
   return (
     <>
       {children}
       <div className="fixed bottom-0 right-8 ml-8">
-        <MessageBox contactId={contactId} />
+        <Suspense>
+          <ContactMessageBox params={params} />
+        </Suspense>
       </div>
     </>
   );

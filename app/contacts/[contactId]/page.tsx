@@ -1,18 +1,12 @@
 import Image from 'next/image';
 import LinkButton from '@/components/ui/LinkButton';
 import { getContact } from '@/data/services/contact';
-import { routes } from '@/validations/routeSchema';
 import DeleteContactButton from './_components/DeleteContactButton';
 import Favorite from './_components/Favorite';
 
-type PageProps = {
-  params: Promise<unknown>;
-  searchParams: Promise<unknown>;
-};
-
-export default async function ContactPage({ params, searchParams }: PageProps) {
-  const { contactId } = routes.contactId.$parseParams(await params);
-  const { q } = routes.home.$parseSearchParams(await searchParams);
+export default async function ContactPage({ params, searchParams }: PageProps<'/contacts/[contactId]'>) {
+  const { contactId } = await params;
+  const { q = '' } = await searchParams;
   const contact = await getContact(contactId);
 
   return (
@@ -50,7 +44,11 @@ export default async function ContactPage({ params, searchParams }: PageProps) {
         )}
         {contact.notes && <div className="max-h-[300px] w-full overflow-auto 2xl:w-1/2">{contact.notes}</div>}
         <div className="my-4 flex gap-2">
-          <LinkButton prefetch={true} theme="secondary" href={routes.contactIdEdit({ contactId, search: { q } })}>
+          <LinkButton
+            prefetch={true}
+            theme="secondary"
+            href={{ pathname: `/contacts/${contactId}/edit` as const, query: q ? { q } : undefined }}
+          >
             Edit
           </LinkButton>
           <DeleteContactButton contactId={contactId} />

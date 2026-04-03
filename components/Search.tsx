@@ -1,18 +1,18 @@
 'use client';
 
 import Form from 'next/form';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useTransition } from 'react';
-import { useSafeSearchParams } from '@/validations/routeSchema';
 import SearchStatus from './ui/SearchStatus';
 
 export default function Search() {
   const router = useRouter();
-  const { q } = useSafeSearchParams('home');
+  const searchParams = useSearchParams();
+  const q = searchParams.get('q') || '';
   const [isPending, startTransition] = useTransition();
 
   return (
-    <Form action="" role="search">
+    <Form action="/" role="search">
       <input
         className="w-full pl-8 outline-offset-1"
         onChange={e => {

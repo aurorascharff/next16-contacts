@@ -5,13 +5,12 @@ import { redirect } from 'next/navigation';
 import { prisma } from '@/db';
 import type { ContactSchemaType, ContactSchemaErrorType } from '@/validations/contactSchema';
 import { contactSchema } from '@/validations/contactSchema';
-import { routes } from '@/validations/routeSchema';
 
 export async function createEmptyContact() {
   const contact = await prisma.contact.create({
     data: {},
   });
-  redirect(routes.contactIdEdit({ contactId: contact.id }));
+  redirect(`/contacts/${contact.id}/edit`);
 }
 
 type State = {
@@ -37,7 +36,7 @@ export async function updateContact(contactId: string, _prevState: State, formDa
     },
   });
 
-  redirect(routes.contactId({ contactId }));
+  redirect(`/contacts/${contactId}`);
 }
 
 export async function favoriteContact(contactId: string, isFavorite: boolean) {
@@ -49,7 +48,7 @@ export async function favoriteContact(contactId: string, isFavorite: boolean) {
       id: contactId,
     },
   });
-  revalidatePath(routes.home());
+  revalidatePath('/');
 }
 
 export async function deleteContact(contactId: string) {
@@ -59,5 +58,5 @@ export async function deleteContact(contactId: string) {
     },
   });
 
-  redirect(routes.home());
+  redirect('/');
 }

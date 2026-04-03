@@ -3,7 +3,6 @@ import Link from 'next/link';
 import React from 'react';
 import { cn } from '@/utils/cn';
 import type { VariantProps } from 'class-variance-authority';
-import type { LinkProps } from 'next/link';
 
 const shadow = 'shadow-sm active:enabled:shadow-xs disabled:shadow-xs';
 
@@ -22,18 +21,12 @@ const linkButton = cva('button', {
 });
 
 type Props = {
-  href: string;
   children: React.ReactNode;
   className?: string;
-};
+} & React.ComponentPropsWithoutRef<typeof Link> &
+  VariantProps<typeof linkButton>;
 
-export default function LinkButton({
-  children,
-  href,
-  theme,
-  className,
-  ...otherProps
-}: Props & LinkProps & VariantProps<typeof linkButton>) {
+export default function LinkButton({ children, href, theme, className, ...otherProps }: Props) {
   return (
     <Link
       {...otherProps}

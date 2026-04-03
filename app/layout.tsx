@@ -9,12 +9,9 @@ import Search from '@/components/Search';
 import Skeleton from '@/components/ui/Skeleton';
 import { getContacts } from '@/data/services/contact';
 import Logo from '@/public/next-js.svg';
-import { routes } from '@/validations/routeSchema';
 import type { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   description: 'Next.js 15 rebuild of Remix Contacts V2',
@@ -39,7 +36,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <ContactList contactsPromise={contacts} />
             </Suspense>
             <div className="m-0 hidden flex-row items-center gap-2 border-t border-t-gray px-8 py-4 font-medium sm:flex">
-              <Link className="flex items-center gap-2 text-black no-underline" href={routes.home()}>
+              <Link className="flex items-center gap-2 text-black no-underline" href="/">
                 <Image priority width={30} height={30} src={Logo} alt="Next.js logo" />
                 Contacts
               </Link>

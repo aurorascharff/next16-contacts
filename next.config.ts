@@ -1,8 +1,8 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  cacheComponents: true,
   experimental: {
-    reactCompiler: true,
     staleTimes: {
       dynamic: 30,
     },
@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  reactCompiler: true,
+  typedRoutes: true,
 };
 
 module.exports = nextConfig;

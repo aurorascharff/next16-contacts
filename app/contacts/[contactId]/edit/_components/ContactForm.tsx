@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import React, { useActionState } from 'react';
 import Input from '@/components/ui/Input';
 import LinkButton from '@/components/ui/LinkButton';
@@ -7,11 +8,11 @@ import SubmitButton from '@/components/ui/SubmitButton';
 import TextArea from '@/components/ui/TextArea';
 import { updateContact } from '@/data/actions/contact';
 import type { ContactSchemaErrorType } from '@/validations/contactSchema';
-import { routes, useSafeSearchParams } from '@/validations/routeSchema';
 import type { Contact } from '@prisma/client';
 
 export default function ContactForm({ contact }: { contact: Contact }) {
-  const { q } = useSafeSearchParams('home');
+  const searchParams = useSearchParams();
+  const q = searchParams.get('q') || '';
   const updateContactById = updateContact.bind(null, contact.id);
   const [state, updateContactAction] = useActionState(updateContactById, {
     data: {
@@ -72,7 +73,10 @@ export default function ContactForm({ contact }: { contact: Contact }) {
         />
       </div>
       <div className="flex gap-2 self-start @sm:self-end">
-        <LinkButton theme="secondary" href={routes.contactId({ contactId: contact.id, search: q ? { q } : undefined })}>
+        <LinkButton
+          theme="secondary"
+          href={{ pathname: `/contacts/${contact.id}` as const, query: q ? { q } : undefined }}
+        >
           Cancel
         </LinkButton>
         <SubmitButton theme="primary">Save</SubmitButton>
