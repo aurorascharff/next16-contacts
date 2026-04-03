@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   title: 'Next Contacts',
 };
 
-export default function RootLayout({ sidebar, content }: LayoutProps<'/'>) {
+export default function RootLayout({ sidebar, children }: LayoutProps<'/'>) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="flex w-full flex-col sm:flex-row">
           {sidebar}
-          <div className="h-2/3 w-full flex-1 px-16 py-8 sm:h-auto">{content}</div>
+          <div className="h-2/3 w-full flex-1 px-16 py-8 sm:h-auto">{children}</div>
         </div>
       </body>
     </html>
