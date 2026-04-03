@@ -1,31 +1,18 @@
-'use client';
-
-import { matchSorter } from 'match-sorter';
-import { useSearchParams } from 'next/navigation';
-import React, { use } from 'react';
+import { getContacts } from '@/data/services/contact';
 import ContactButton from './ContactButton';
-import type { Contact } from '@prisma/client';
 
 type Props = {
-  contactsPromise: Promise<Contact[]>;
+  q?: string;
 };
 
-export default function ContactList({ contactsPromise }: Props) {
-  const contacts = use(contactsPromise);
-  const searchParams = useSearchParams();
-  const q = searchParams.get('q') || '';
-
-  const filteredContacts = q
-    ? matchSorter(contacts, q, {
-        keys: ['first', 'last'],
-      })
-    : contacts;
+export default async function ContactList({ q }: Props) {
+  const contacts = await getContacts(q);
 
   return (
     <nav className="flex-1 overflow-auto px-8 py-4">
-      {filteredContacts.length ? (
+      {contacts.length ? (
         <ul>
-          {filteredContacts.map(contact => {
+          {contacts.map(contact => {
             return (
               <li key={contact.id} className="mx-1">
                 <ContactButton contact={contact} />
