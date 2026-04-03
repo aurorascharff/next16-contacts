@@ -1,8 +1,8 @@
-# Next.js 15 Contacts App
+# Next.js 16 Contacts App
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-It is based on the React Router [Address Book]([https://remix.run/docs/en/main/start/tutorial](https://reactrouter.com/tutorials/address-book) tutorial, but uses Next.js 15 with Server Actions, Tailwind CSS, and Prisma.
+It is based on the React Router [Address Book]([https://remix.run/docs/en/main/start/tutorial](https://reactrouter.com/tutorials/address-book) tutorial, but uses Next.js 16 with Server Actions, Tailwind CSS, and Prisma.
 It no longer uses a global transition handler; instead, it utilizes local transitions and `useFormStatus`.
 
 See branches `react-hook-form` and `react-query` for modified app versions.
@@ -99,9 +99,7 @@ Please refer to the [Next.js App Router](https://nextjs.org/docs/app) documentat
 
 #### Note on Type-Safe Routing
 
-In the Next.js App Router, routes, route params and search params are not typed by default. Therefore, [next-safe-navigation](https://github.com/lukemorales/next-safe-navigation) is used for type-safe navigation. All routes are defined in `src/validations/routeSchema.ts` and can be used by calling `routes.<routeName>`.
-
-In client components, parsing params is done with the hooks `useSafeParams` and `useSafeSearchParams`. For server components, the `pageProps` are passed down as an unknown object and validated with `routes.<routeName>.$parseParams` and `routes.<routeName>.$parseSearchParams`.
+The project uses Next.js built-in `typedRoutes` for type-safe navigation. Page and layout components use the globally available `PageProps` and `LayoutProps` type helpers for typed params and search params. In client components, `useSearchParams` from `next/navigation` is used to access search params.
 
 ### Note on React 19
 
