@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import NewContactButton from '@/components/NewContactButton';
 import Search from '@/components/Search';
+import Skeleton from '@/components/ui/Skeleton';
 import Logo from '@/public/next-js.svg';
 
 export default function SidebarLayout({ children }: { children: React.ReactNode }) {
@@ -14,7 +15,9 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
         </Suspense>
         <NewContactButton />
       </div>
-      {children}
+      <Suspense fallback={<Skeleton className="flex grow flex-col px-10 py-6" />}>
+        {children}
+      </Suspense>
       <div className="m-0 hidden flex-row items-center gap-2 border-t border-t-gray px-8 py-4 font-medium sm:flex">
         <Link className="flex items-center gap-2 text-black no-underline" href="/">
           <Image priority width={30} height={30} src={Logo} alt="Next.js logo" />
