@@ -6,7 +6,6 @@ import { cache } from 'react';
 import { prisma } from '@/db';
 
 export const getContact = cache(async (contactId: string) => {
-  await new Promise(resolve => setTimeout(resolve, 2000)); // TODO: remove - testing loading state
   const contact = await prisma.contact.findUnique({
     where: {
       id: contactId,
