@@ -9,7 +9,8 @@ See branches `react-hook-form` and `react-query` for modified app versions.
 
 ## Requirements
 
-- Installed Node.js
+- Installed Node.js 20.19.0 or newer
+- Installed pnpm via Corepack (`corepack enable`)
 - Installed Visual Studio Code
 
 ## Usage

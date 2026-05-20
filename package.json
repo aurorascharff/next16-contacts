@@ -2,6 +2,10 @@
   "name": "next16-remix-contacts-rebuild-v2",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.19.0",
+    "pnpm": ">=10.33.0 <11"
+  },
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
@@ -23,10 +27,10 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "eslint": "9.21.0",
-    "eslint-config-next": "15.2.0",
+    "eslint-config-next": "16.2.6",
     "match-sorter": "^8.0.0",
-    "next": "^16.2.2",
-    "postcss": "^8.5.3",
+    "next": "16.2.6",
+    "postcss": "8.5.10",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-error-boundary": "^5.0.0",
@@ -36,7 +40,7 @@
     "tailwind-merge": "^3.0.2",
     "tailwindcss": "^3.4.17",
     "typescript": "5.7.3",
-    "uuid": "^11.1.0",
+    "uuid": "11.1.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {
@@ -57,5 +61,22 @@
     "prisma": "^6.4.1",
     "tsx": "^4.19.3"
   },
-  "packageManager": "pnpm@10.33.0"
+  "packageManager": "pnpm@10.33.0",
+  "pnpm": {
+    "overrides": {
+      "@babel/helpers": "7.29.2",
+      "@babel/runtime": "7.29.2",
+      "@eslint/plugin-kit": "0.3.4",
+      "ajv@<6.14.0": "6.14.0",
+      "brace-expansion@>=1.0.0 <1.1.13": "1.1.13",
+      "flatted@<=3.4.1": "3.4.2",
+      "glob@>=10.2.0 <10.5.0": "10.5.0",
+      "js-yaml@>=4.0.0 <4.1.1": "4.1.1",
+      "minimatch@<3.1.4": "3.1.4",
+      "minimatch@>=9.0.0 <9.0.7": "9.0.7",
+      "picomatch@<2.3.2": "2.3.2",
+      "postcss": "8.5.10",
+      "yaml": "2.8.3"
+    }
+  }
 }
