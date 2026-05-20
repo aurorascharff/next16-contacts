@@ -17,13 +17,13 @@ See branches `react-hook-form` and `react-query` for modified app versions.
 First, install the dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Then, run the development server:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -41,25 +41,25 @@ Consider adding a `.env` file to the root of the project and use the environment
 When using sqlite, initialize the database with:
 
 ```bash
-npm run prisma.push
+pnpm prisma.push
 ```
 
 Seed prisma/seed.ts for initial data:
 
 ```sh
-npm run prisma.seed
+pnpm prisma.seed
 ```
 
 To view your data in the database, you can run:
 
 ```bash
-npm run prisma.studio
+pnpm prisma.studio
 ```
 
 When using a real database with for example postgresql or sqlserver, you need to migrate the database schema with:
 
 ```bash
-npm run prisma.migrate
+pnpm prisma.migrate
 ```
 
 ## Development Info
@@ -130,7 +130,7 @@ When using a form with an action, the loading state is included in the `SubmitBu
 
 ## Deployment
 
-The app can be built for production using the `npm run build` command. The built files will be generated in the `.next` folder.
+The app can be built for production using the `pnpm build` command. The built files will be generated in the `.next` folder.
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
